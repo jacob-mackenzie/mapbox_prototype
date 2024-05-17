@@ -15,15 +15,31 @@
 <body>
     <h1>MapBox Prototype</h1>
 
-    <div id='map' style='width: 400px; height: 300px;'></div>
+    <div id='map' style='width: 800px; height: 600px;'></div>
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiamotbWFja2VuemllIiwiYSI6ImNsd2IyNmYyYjBnbG8ycWw5NDczcjJheGoifQ.-2O1eR7cAyYaO1vCBzAoqQ';
     const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: 9, // starting zoom
+        center: [-87.8, 42.1], // starting position [lng, lat]
+        zoom: 12, // starting zoom
     });
+
+    // create the popup
+    const popup = new mapboxgl.Popup({ offset: 50 })
+        .setHTML(`
+        <div>
+            <div class='roboto-bold'>Wesco Glenview</div>
+            <div>2301 Patriot Blvd.</div>
+            <div>Glenview, IL 60026</div>
+            <a href="#">Directions</a>
+        </div>`);
+
+    const marker2 = new mapboxgl.Marker({ color: 'green' })
+    .setLngLat([-87.8239, 42.0974])
+    .setPopup(popup)
+    .addTo(map);
+
     </script>
 </body>
 </html>
