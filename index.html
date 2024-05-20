@@ -16,6 +16,8 @@
     <h1>MapBox Prototype</h1>
 
     <div id='map' style='width: 800px; height: 600px;'></div>
+    <button id="button1">Fly to Calgary</button>
+    <button id="button2">Fly to Glenview</button>
     <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiamotbWFja2VuemllIiwiYSI6ImNsd2IyNmYyYjBnbG8ycWw5NDczcjJheGoifQ.-2O1eR7cAyYaO1vCBzAoqQ';
     const map = new mapboxgl.Map({
@@ -26,19 +28,46 @@
     });
 
     // create the popup
-    const popup = new mapboxgl.Popup()
+    const popup = new mapboxgl.Popup({offset: 16})
         .setHTML(`
         <div>
-            <div class='roboto-bold'>Wesco Glenview</div>
+            <div class='popup-header'>Wesco Glenview</div>
             <div>2301 Patriot Blvd.</div>
             <div>Glenview, IL 60026</div>
-            <a href="#">Directions</a>
+            <div></div>
+            <div>(123) 555-7890'</div>
+            <div class='button-group'>
+                <div>.5 km</div>
+                <div class='button'>Details</div>
+            <div>
         </div>`);
+    
+    const markerElement = document.createElement('div');
+    markerElement.classList.add('marker');
+    markerElement.innerHTML = `<div>W</div>`;
 
-    const marker2 = new mapboxgl.Marker({ color: 'green' })
+    const markerElement2 = document.createElement('div');
+    markerElement2.classList.add('marker');
+    markerElement2.innerHTML = `<div>E</div>`;
+
+    const marker = new mapboxgl.Marker({ element: markerElement })
     .setLngLat([-87.8239, 42.0974])
     .setPopup(popup)
     .addTo(map);
+
+    const marker2 = new mapboxgl.Marker({ element: markerElement2 })
+    .setLngLat([-114.0554, 50.9031])
+    .addTo(map);
+
+    const button1 = document.getElementById('button1');
+    button1.addEventListener('click', () => {
+        map.flyTo({center: [-114.06, 50.90], zoom: 12});
+    });
+
+    const button2 = document.getElementById('button2');
+    button2.addEventListener('click', () => {
+        map.flyTo({center: [-87.8, 42.1], zoom: 12});
+    });
 
     </script>
 </body>
