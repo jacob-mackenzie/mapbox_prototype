@@ -15,60 +15,58 @@
 <body>
     <h1>MapBox Prototype</h1>
 
-    <div id='map' style='width: 800px; height: 600px;'></div>
-    <button id="button1">Fly to Calgary</button>
-    <button id="button2">Fly to Glenview</button>
+    <div class="container">
+        <div id="locations" class="locations"></div>
+        <div id='map' class="map"></div>
+    </div>
+
     <script>
+    
     mapboxgl.accessToken = 'pk.eyJ1IjoiamotbWFja2VuemllIiwiYSI6ImNsd2IyNmYyYjBnbG8ycWw5NDczcjJheGoifQ.-2O1eR7cAyYaO1vCBzAoqQ';
     const map = new mapboxgl.Map({
         container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-87.8, 42.1], // starting position [lng, lat]
-        zoom: 12, // starting zoom
+        center: [-123.1, 49.3], // starting position [lng, lat]
+        zoom: 9, // starting zoom
     });
-
-    // create the popup
-    const popup = new mapboxgl.Popup({offset: 16})
-        .setHTML(`
-        <div>
-            <div class='popup-header'>Wesco Glenview</div>
-            <div>2301 Patriot Blvd.</div>
-            <div>Glenview, IL 60026</div>
-            <div></div>
-            <div>(123) 555-7890'</div>
-            <div class='button-group'>
-                <div>.5 km</div>
-                <div class='button'>Details</div>
-            <div>
-        </div>`);
     
-    const markerElement = document.createElement('div');
-    markerElement.classList.add('marker');
-    markerElement.innerHTML = `<div>W</div>`;
+    String.prototype.toProperCase = function () {
+        return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    };
 
-    const markerElement2 = document.createElement('div');
-    markerElement2.classList.add('marker');
-    markerElement2.innerHTML = `<div>E</div>`;
+    async function getPayload(){
+        const payload = await fetch('locations.json').then(response => response.json());
+        return payload;
+    }
 
-    const marker = new mapboxgl.Marker({ element: markerElement })
-    .setLngLat([-87.8239, 42.0974])
-    .setPopup(popup)
-    .addTo(map);
+    async function render() {
 
-    const marker2 = new mapboxgl.Marker({ element: markerElement2 })
-    .setLngLat([-114.0554, 50.9031])
-    .addTo(map);
+        const payload = await getPayload();
 
-    const button1 = document.getElementById('button1');
-    button1.addEventListener('click', () => {
-        map.flyTo({center: [-114.06, 50.90], zoom: 12});
-    });
+        const items = payload.data.branches.items;
+        const container = document.getElementById('locations');
 
-    const button2 = document.getElementById('button2');
-    button2.addEventListener('click', () => {
-        map.flyTo({center: [-87.8, 42.1], zoom: 12});
-    });
+        items.forEach(element => {
+            const locContainer = document.createElement('div');
+            locContainer.classList.add('item');
+            locContainer.innerHTML = /* html */`
+                <div>${element.name.toProperCase()}</div>
+                <div>${element.location.street.toProperCase()}</div>
+                <div>${element.location.city.toProperCase()} ${element.location.region} ${element.location.postcode}
+            `;
 
+            locContainer.addEventListener('click', () => {
+                map.flyTo({center: [element.location.longitude, element.location.latitude], zoom: 12})
+            })
+
+            container.appendChild(locContainer);
+            const marker = new mapboxgl.Marker({color: "blue"})
+                .setLngLat([element.location.longitude, element.location.latitude])
+                .addTo(map);
+            });
+    }
+
+    render();
+    
     </script>
 </body>
 </html>

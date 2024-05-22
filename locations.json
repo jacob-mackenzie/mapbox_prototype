@@ -1,0 +1,84 @@
+{
+    "data": {
+        "branches": {
+            "items": [
+                {
+                    "name": "NORTH VANCOUVER",
+                    "code": "04",
+                    "brand_code": "eecol",
+                    "sales_region": "05",
+                    "location": {
+                        "street": "244 DONAGHY AVENUE",
+                        "city": "NORTH VANCOUVER",
+                        "region": "BC",
+                        "country": "CA",
+                        "postcode": "V7P 2L5",
+                        "latitude": "49.31954",
+                        "longitude": "-123.09642"
+                    }
+                },
+                {
+                    "name": "VANCOUVER",
+                    "code": "01",
+                    "brand_code": "eecol",
+                    "sales_region": "05",
+                    "location": {
+                        "street": "3600 EAST 1ST AVENUE",
+                        "city": "VANCOUVER",
+                        "region": "BC",
+                        "country": "CA",
+                        "postcode": "V5M 1C3",
+                        "latitude": "49.2692",
+                        "longitude": "-123.02647"
+                    }
+                },
+                {
+                    "name": "TRIEDVANCS",
+                    "code": "74T",
+                    "brand_code": "anixter",
+                    "sales_region": "TI",
+                    "location": {
+                        "street": "3006 BETA AVE",
+                        "city": "BURNABY",
+                        "region": "BRI",
+                        "country": "CA",
+                        "postcode": "V5G 4K4",
+                        "latitude": "49.2564941",
+                        "longitude": "-122.9974809"
+                    }
+                },
+                {
+                    "name": "VANCNVIDEO",
+                    "code": "74N",
+                    "brand_code": "anixter",
+                    "sales_region": "TI",
+                    "location": {
+                        "street": "3006 BETA AVE",
+                        "city": "BURNABY",
+                        "region": "BC",
+                        "country": "CA",
+                        "postcode": "V5G 4K4",
+                        "latitude": "49.2564941",
+                        "longitude": "-122.9974809"
+                    }
+                },
+                {
+                    "name": "SEASPAN",
+                    "code": "72L",
+                    "brand_code": "anixter",
+                    "sales_region": "TI",
+                    "location": {
+                        "street": "18371 BLUNDELL ROAD",
+                        "city": "RICHMOND",
+                        "region": "BC",
+                        "country": "CA",
+                        "postcode": "V6W 1L8",
+                        "latitude": "49.1557542",
+                        "longitude": "-123.0694233"
+                    }
+                }
+            ],
+            "total_count": 15
+        }
+    }
+}
